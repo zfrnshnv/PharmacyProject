@@ -2,8 +2,9 @@ from django.shortcuts import render
 from drf_spectacular.utils import extend_schema
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
-from apps.models import Category
-from apps.serializers import CategoryModelSerializer
+from apps.models import Category, City, Country, Order, Supplier, Medicine
+from apps.serializers import CategoryModelSerializer, CityModelSerializer, CountryModelSerializer, OrderModelSerializer, \
+    SupplierModelSerializer, MedicineModelSerializer
 
 
 # Create your views here.
@@ -18,7 +19,8 @@ class CategoryCreateApiView(CreateAPIView):
 
 @extend_schema(tags=['medicine'])
 class MedicineListApiView(ListAPIView):
-    pass
+    queryset = Medicine.objects.all()
+    serializer_class = MedicineModelSerializer
 
 @extend_schema(tags=['medicine'])
 class MedicineRetrieveApiView(RetrieveAPIView):
@@ -38,7 +40,8 @@ class MedicineDeleteApiView(DestroyAPIView):
 
 @extend_schema(tags=['supplier'])
 class SupplierListApiView(ListAPIView):
-    pass
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierModelSerializer
 
 @extend_schema(tags=['supplier'])
 class SupplierCreateApiView(CreateAPIView):
@@ -46,7 +49,8 @@ class SupplierCreateApiView(CreateAPIView):
 
 @extend_schema(tags=['order'])
 class OrderListApiView(ListAPIView):
-    pass
+    queryset = Order.objects.all()
+    serializer_class = OrderModelSerializer
 
 @extend_schema(tags=['order'])
 class OrderCreateApiView(CreateAPIView):
@@ -58,8 +62,10 @@ class OrderUpdateApiView(UpdateAPIView):
 
 @extend_schema(tags=['locations'])
 class CityListApiView(ListAPIView):
-    pass
+    queryset = City.objects.all()
+    serializer_class = CityModelSerializer
 
 @extend_schema(tags=['locations'])
 class CountryListApiView(ListAPIView):
-    pass
+    queryset = Country.objects.all()
+    serializer_class = CountryModelSerializer
