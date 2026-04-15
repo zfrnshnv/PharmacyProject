@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from drf_spectacular.utils import extend_schema
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
+    ListCreateAPIView
 
 from apps.models import Category, City, Country, Order, Supplier, Medicine
 from apps.serializers import CategoryModelSerializer, CityModelSerializer, CountryModelSerializer, OrderModelSerializer, \
@@ -14,8 +15,9 @@ class CategoryListApiView(ListAPIView):
     serializer_class = CategoryModelSerializer
 
 @extend_schema(tags=['category'])
-class CategoryCreateApiView(CreateAPIView):
-    pass
+class CategoryCreateApiView(ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryModelSerializer
 
 @extend_schema(tags=['medicine'])
 class MedicineListApiView(ListAPIView):
@@ -24,19 +26,23 @@ class MedicineListApiView(ListAPIView):
 
 @extend_schema(tags=['medicine'])
 class MedicineRetrieveApiView(RetrieveAPIView):
-    pass
+    queryset = Medicine.objects.all()
+    serializer_class = MedicineModelSerializer
 
 @extend_schema(tags=['medicine'])
-class MedicineCreateApiView(CreateAPIView):
-    pass
+class MedicineCreateApiView(ListCreateAPIView):
+    queryset = Medicine.objects.all()
+    serializer_class = MedicineModelSerializer
 
 @extend_schema(tags=['medicine'])
 class MedicineUpdateApiView(UpdateAPIView):
-    pass
+    queryset = Medicine.objects.all()
+    serializer_class = MedicineModelSerializer
 
 @extend_schema(tags=['medicine'])
 class MedicineDeleteApiView(DestroyAPIView):
-    pass
+    queryset = Medicine.objects.all()
+    serializer_class = MedicineModelSerializer
 
 @extend_schema(tags=['supplier'])
 class SupplierListApiView(ListAPIView):
@@ -44,8 +50,9 @@ class SupplierListApiView(ListAPIView):
     serializer_class = SupplierModelSerializer
 
 @extend_schema(tags=['supplier'])
-class SupplierCreateApiView(CreateAPIView):
-    pass
+class SupplierCreateApiView(ListCreateAPIView):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierModelSerializer
 
 @extend_schema(tags=['order'])
 class OrderListApiView(ListAPIView):
@@ -53,12 +60,14 @@ class OrderListApiView(ListAPIView):
     serializer_class = OrderModelSerializer
 
 @extend_schema(tags=['order'])
-class OrderCreateApiView(CreateAPIView):
-    pass
+class OrderCreateApiView(ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderModelSerializer
 
 @extend_schema(tags=['order'])
 class OrderUpdateApiView(UpdateAPIView):
-    pass
+    queryset = Order.objects.all()
+    serializer_class = OrderModelSerializer
 
 @extend_schema(tags=['locations'])
 class CityListApiView(ListAPIView):
